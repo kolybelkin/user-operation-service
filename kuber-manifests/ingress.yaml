@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  namespace: kolybelkin
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - path: /otusapp/kolybelkin/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: kolybelkin-app-service
+                port:
+                  number: 80

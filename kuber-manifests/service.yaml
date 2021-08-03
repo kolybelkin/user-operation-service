@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kolybelkin-app-service
+  namespace: kolybelkin
+spec:
+  selector:
+    app: kolybelkin-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: web
