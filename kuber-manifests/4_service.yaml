@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kolybelkin-app-service
+  name: user-operation-service-service
   namespace: kolybelkin
 spec:
   selector:
-    app: kolybelkin-app
+    app: user-operation-service
   ports:
     - protocol: TCP
       port: 80

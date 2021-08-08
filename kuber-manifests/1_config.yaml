@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-operation-service-config
+  namespace: kolybelkin
+data:
+  application.properties: |-
+    springfox.documentation.open-api.v3.path=/api-docs
+    server.servlet.contextPath=/api/v1/
+    server.port=8080
+    spring.jackson.date-format=io.swagger.RFC3339DateFormat
+    spring.jackson.serialization.WRITE_DATES_AS_TIMESTAMPS=false
+
+    spring.datasource.hikari.connectionTimeout=20000
+    spring.datasource.hikari.maximumPoolSize=5
+
+    spring.datasource.url=${POSTGRE_URL}
+    spring.datasource.username=${POSTGRE_USERNAME}
+    spring.datasource.password=${POSTGRE_PASSWORD}
+    spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
