@@ -33,8 +33,8 @@ spec:
             - name: POSTGRE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
-                  key: password
+                  name: common-postgresql
+                  key: postgresql-password
           readinessProbe:
             tcpSocket:
               port: 8080
