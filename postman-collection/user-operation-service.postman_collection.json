@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "0f318bbd-463e-454f-aeaa-c2fc63e7f9ab",
+		"name": "user-operation-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user/1",
+					"host": [
+						"172",
+						"16",
+						"146",
+						"3"
+					],
+					"path": [
+						"otusapp",
+						"kolybelkin",
+						"api",
+						"v1",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user/1",
+					"host": [
+						"172",
+						"16",
+						"146",
+						"3"
+					],
+					"path": [
+						"otusapp",
+						"kolybelkin",
+						"api",
+						"v1",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"username\": \"KolybelkinV5\",\n    \"firstName\": \"Viacheslav2\",\n    \"lastName\": \"Kolybelkin2\",\n    \"email\": \"kolybelkin@gmail.com2\",\n    \"phone\": \"+79093336665\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user/5",
+					"host": [
+						"172",
+						"16",
+						"146",
+						"3"
+					],
+					"path": [
+						"otusapp",
+						"kolybelkin",
+						"api",
+						"v1",
+						"user",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"KolybelkinV2\",\n    \"firstName\": \"Viacheslav2\",\n    \"lastName\": \"Kolybelkin2\",\n    \"email\": \"kolybelkin@gmail.com2\",\n    \"phone\": \"+79093336665\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user",
+					"host": [
+						"172",
+						"16",
+						"146",
+						"3"
+					],
+					"path": [
+						"otusapp",
+						"kolybelkin",
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
