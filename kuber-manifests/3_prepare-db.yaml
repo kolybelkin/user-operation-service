@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: prepare-database-job
+  namespace: kolybelkin
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: prepare-database
+          image: postgres:latest
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: common-postgresql
+                  key: postgresql-password
+          command:
+            - sh
+            - "-c"
+            - |
+              psql postgres://common-postgresql:5432/postgres <<'EOF'
+                create table user (id bigint primary key, username varchar, firstName varchar, lastName varchar, email varchar, phone varchar);
+                insert into user (id, username, firstName, lastName, email, phone) values (1, 'Viacheslav', 'Kolybelkin', 'kolybelkin@gmail.com', '+79093336666);
+              EOF
+
+  backoffLimit: 0
