@@ -9,20 +9,12 @@
 			"name": "Get user",
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Host",
-						"value": "arch.homework",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user/1",
+					"raw": "arch.homework/otusapp/kolybelkin/api/v1/user/1",
 					"host": [
-						"172",
-						"16",
-						"146",
-						"3"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"otusapp",
@@ -40,20 +32,12 @@
 			"name": "Delete user",
 			"request": {
 				"method": "DELETE",
-				"header": [
-					{
-						"key": "Host",
-						"value": "arch.homework",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user/1",
+					"raw": "arch.homework/otusapp/kolybelkin/api/v1/user/1",
 					"host": [
-						"172",
-						"16",
-						"146",
-						"3"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"otusapp",
@@ -71,13 +55,7 @@
 			"name": "Update user",
 			"request": {
 				"method": "PUT",
-				"header": [
-					{
-						"key": "Host",
-						"value": "arch.homework",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"id\": 2,\n    \"username\": \"KolybelkinV5\",\n    \"firstName\": \"Viacheslav2\",\n    \"lastName\": \"Kolybelkin2\",\n    \"email\": \"kolybelkin@gmail.com2\",\n    \"phone\": \"+79093336665\"\n}",
@@ -88,12 +66,10 @@
 					}
 				},
 				"url": {
-					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user/5",
+					"raw": "arch.homework/otusapp/kolybelkin/api/v1/user/5",
 					"host": [
-						"172",
-						"16",
-						"146",
-						"3"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"otusapp",
@@ -111,13 +87,7 @@
 			"name": "Create user",
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Host",
-						"value": "arch.homework",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"username\": \"KolybelkinV2\",\n    \"firstName\": \"Viacheslav2\",\n    \"lastName\": \"Kolybelkin2\",\n    \"email\": \"kolybelkin@gmail.com2\",\n    \"phone\": \"+79093336665\"\n}",
@@ -128,12 +98,10 @@
 					}
 				},
 				"url": {
-					"raw": "172.16.146.3/otusapp/kolybelkin/api/v1/user",
+					"raw": "arch.homework/otusapp/kolybelkin/api/v1/user",
 					"host": [
-						"172",
-						"16",
-						"146",
-						"3"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"otusapp",
