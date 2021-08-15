@@ -4,13 +4,13 @@ metadata:
   name: minimal-ingress
   namespace: kolybelkin
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /api/v1/$1
 spec:
   rules:
     - host: arch.homework
       http:
         paths:
-          - path: /otusapp/kolybelkin/(.*)
+          - path: /otusapp/kolybelkin/app/(.*)
             pathType: Prefix
             backend:
               service:
