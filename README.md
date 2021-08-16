@@ -19,3 +19,7 @@
 # Apply prometheus manifests
 
 1) `kubectl apply -f ./kuber-manifests/prometheus-grafana/.`
+
+# Other useful commands
+
+1) Forward port to localhost - `kubectl port-forward service/prometheus-kube-prometheus-prometheus 9090 -n monitoring`
