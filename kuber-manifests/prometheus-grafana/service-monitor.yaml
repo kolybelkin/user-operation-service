@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: uos-service-monitor
+  namespace: monitoring
+spec:
+  jobLabel: uos-service-monitor
+  namespaceSelector:
+    matchNames:
+      - kolybelkin
+  selector:
+    matchLabels:
+      service: uos-service
+  endpoints:
+    - interval: 15s
+      port: web
+      path: /api/v1/actuator/prometheus

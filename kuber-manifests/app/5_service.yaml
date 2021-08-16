@@ -3,10 +3,13 @@ kind: Service
 metadata:
   name: user-operation-service-service
   namespace: kolybelkin
+  labels:
+    service: uos-service
 spec:
   selector:
     app: user-operation-service
   ports:
-    - protocol: TCP
+    - name: web
+      protocol: TCP
       port: 80
       targetPort: web
