@@ -30,16 +30,19 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 9,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 6,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -68,7 +71,32 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                    "GET /user/{userId}"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -76,7 +104,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 4,
+      "id": 6,
       "options": {
         "legend": {
           "calcs": [],
@@ -90,13 +118,122 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.95, sum(http_server_requests_seconds_sum))",
+          "expr": "rate(http_server_requests_seconds_count{method=\"GET\",outcome=\"SUCCESS\",status=\"200\",uri=\"/user/{userId}\"}[1m])",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "GET /user/{userId}",
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "RPS",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 9,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                    "findById"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(spring_data_repository_invocations_seconds_count{method=\"findById\",repository=\"UserRepository\",state=\"SUCCESS\"}[1m])",
+          "interval": "",
+          "legendFormat": "findById",
+          "refId": "A"
+        }
+      ],
+      "title": "RPS for database",
       "type": "timeseries"
     },
     {
@@ -153,9 +290,164 @@
       ],
       "title": "Error rate",
       "type": "piechart"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                  1
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                  "0.95",
+                  "5m",
+                  "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "count"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "95 percentile is more than 1 second",
+        "name": "Percentiles alert",
+        "noDataState": "no_data",
+        "notifications": []
+      },
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 9,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{method=\"GET\",outcome=\"SUCCESS\",status=\"200\",uri=\"/user/{userId}\"}[1m])) by (le))",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "0.95 - GET /user/{userId}",
+          "refId": "0.95"
+        },
+        {
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket{method=\"GET\",outcome=\"SUCCESS\",status=\"200\",uri=\"/user/{userId}\"}[1m])) by (le))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "0.99 - GET /user/{userId}",
+          "refId": "0.99"
+        },
+        {
+          "exemplar": true,
+          "expr": "histogram_quantile(0.50, sum(rate(http_server_requests_seconds_bucket{method=\"GET\",outcome=\"SUCCESS\",status=\"200\",uri=\"/user/{userId}\"}[1m])) by (le))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "0.5 - GET /user/{userId}",
+          "refId": "0.5"
+        },
+        {
+          "exemplar": true,
+          "expr": "histogram_quantile(1, sum(rate(http_server_requests_seconds_bucket{method=\"GET\",outcome=\"SUCCESS\",status=\"200\",uri=\"/user/{userId}\"}[1m])) by (le))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "MAX - GET /user/{userId}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "gt",
+          "value": 1,
+          "visible": true
+        }
+      ],
+      "title": "Percentiles",
+      "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": "5s",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [],
@@ -170,5 +462,5 @@
   "timezone": "",
   "title": "user-operation-service-dashboard",
   "uid": "bIhA3dnnz",
-  "version": 1
+  "version": 13
 }
