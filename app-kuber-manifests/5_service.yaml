@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-operation-service-service
+  namespace: kolybelkin
+  labels:
+    service: uos-service
+spec:
+  selector:
+    app: user-operation-service
+  ports:
+    - name: web
+      protocol: TCP
+      port: 80
+      targetPort: web
+#
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: user-operation-service-service-v2
+#  namespace: kolybelkin
+#  labels:
+#    service: uos-service-v2
+#spec:
+#  selector:
+#    app: user-operation-service
+#  ports:
+#    - name: web
+#      protocol: TCP
+#      port: 80
+#      targetPort: web

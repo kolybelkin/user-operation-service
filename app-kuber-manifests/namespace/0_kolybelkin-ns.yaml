@@ -4,3 +4,4 @@ metadata:
   name: kolybelkin
   labels:
     name: kolybelkin
+    istio-injection: enabled
